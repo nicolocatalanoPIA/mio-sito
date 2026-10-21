@@ -1,5 +1,9 @@
 body {
   background: lightblue;
+  background-image: url("img/sfondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
@@ -10,7 +14,7 @@ h1 {
 }
 
 .sotto {
-  color: gray;
+  color: #333;
 }
 
 .scheda {
@@ -20,6 +24,14 @@ h1 {
   padding: 20px;
   border-radius: 12px;
   text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: comparsa 0.8s ease-out;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.scheda:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
@@ -28,20 +40,88 @@ h2 {
 
 .piede {
   font-size: 12px;
-  color: gray;
+  color: #333;
 }
-.scheda {
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+
+/* Bottoni e menu */
 .bottone {
-display: inline-block;
-background: darkblue;
-color: white;
-padding: 8px 14px;
-border-radius: 8px;
-text-decoration: none;
-margin: 4px;
+  display: inline-block;
+  background: darkblue;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin: 4px;
+  transition: background 0.3s, transform 0.3s;
 }
+
 .bottone:hover {
-background: orange;
+  background: orange;
+  transform: scale(1.08);
+}
+
+.bottone:focus-visible {
+  outline: 3px solid orange;
+  outline-offset: 2px;
+}
+
+.menu {
+  margin: 10px auto;
+}
+
+.bottone.attivo {
+  background: teal;
+}
+
+/* Pagina competenze: barre */
+.competenza span {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: darkblue;
+}
+
+.barra {
+  background: #dfeff3;
+  border-radius: 8px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.riempi {
+  background: teal;
+  height: 100%;
+  width: var(--livello);
+  border-radius: 8px;
+  animation: riempimento 1.5s ease-out;
+}
+
+/* Pagina passione: pallone */
+.pallone {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: 100%;
+  height: auto;
+  animation: rimbalzo 1.6s ease-in-out infinite;
+}
+
+/* Animazioni */
+@keyframes comparsa {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes riempimento {
+  from { width: 0; }
+  to   { width: var(--livello); }
+}
+
+@keyframes rimbalzo {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-18px) rotate(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scheda, .riempi, .pallone { animation: none; }
+  .scheda, .bottone { transition: none; }
 }
